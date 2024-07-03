@@ -7,10 +7,11 @@ import { WizardStep } from '../models/wizard-step.model';
   providedIn: 'root'
 })
 export class WizardService {
+  private configUrl = 'http://localhost:3000/wizard/steps';
 
   constructor(private http: HttpClient) { }
 
   getWizardSteps(): Observable<WizardStep[]> {
-    return this.http.get<WizardStep[]>('/assets/wizard-config.json');
+    return this.http.get<WizardStep[]>(this.configUrl);
   }
 }
