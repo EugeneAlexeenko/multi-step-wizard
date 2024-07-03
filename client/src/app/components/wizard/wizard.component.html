@@ -1,3 +1,9 @@
-<p>wizard works!</p>
+<p>wizard component</p>
 
+@if (error) {
+<div class="error"> {{error}} </div>
+}
+
+@if (steps && steps.length > 0) {
 <pre>{{steps | json}}</pre>
+}
