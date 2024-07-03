@@ -8,21 +8,17 @@
 <div class="wizard">
   <h2>{{ steps[currentStepIndex].title }}</h2>
 
-  <div>TODO: render fields here</div>
+  <form [formGroup]="wizardForm" (ngSubmit)="onSubmit()">
+    <div>TODO: render fields here</div>
 
-  <div class="navigation">
-    @if (currentStepIndex > 0) {
-    <button type="button" (click)="prevStep()">Previous</button>
-    }
-    @if (currentStepIndex < steps.length - 1 ) { <button type="button" (click)="nextStep()">Next</button>
-      }
-      @if (currentStepIndex === steps.length - 1) {
-      <button type="submit">Submit</button>
-      }
-  </div>
-
-  <div class="progress">
-    Step {{ currentStepIndex + 1 }}/{{ steps.length }}
-  </div>
+    <div class="navigation">
+      @if (currentStepIndex > 0) {<button type="button" (click)="prevStep()">Previous</button>}
+      @if (currentStepIndex < steps.length - 1 ) { <button type="button" (click)="nextStep()">Next</button> }
+        @if (currentStepIndex === steps.length - 1) { <button type="submit">Submit</button> }
+    </div>
+    <div class="progress">
+      Step {{ currentStepIndex + 1 }}/{{ steps.length }}
+    </div>
+  </form>
 </div>
 }
