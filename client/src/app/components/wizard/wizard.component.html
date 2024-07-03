@@ -9,8 +9,17 @@
     <div *ngFor="let question of steps[currentStepIndex]?.questions" class="field">
       <label>{{ question.label }}</label>
       <ng-container [ngSwitch]="question.type">
+
         <input *ngSwitchCase="'input'" type="text" [formControlName]="question.key">
+
         <input *ngSwitchCase="'numeric'" type="number" [formControlName]="question.key">
+
+        <div *ngSwitchCase="'single-choice'">
+          <label *ngFor="let option of question.options">
+            <input type="radio" [value]="option" [formControlName]="question.key">{{ option }}
+          </label>
+        </div>
+
       </ng-container>
     </div>
 
