@@ -3,5 +3,13 @@
 }
 
 .wizard {
-  outline: 1px solid #ccc;
+  padding: 5px 10px;
+}
+
+.field {
+  padding: 5px 10px;
+}
+
+.navigation {
+  margin: 30px 0;
 }

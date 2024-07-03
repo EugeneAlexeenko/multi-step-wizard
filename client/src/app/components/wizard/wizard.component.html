@@ -1,24 +1,27 @@
 <h1>Multi Step Wizard Example:</h1>
 
-@if (error) {
-<div class="error">{{error}}</div>
-}
+<div *ngIf="error" class="error">{{error}}</div>
 
-@if (steps && steps.length > 0) {
-<div class="wizard">
+<div *ngIf="steps.length > 0" class="wizard">
   <h2>{{ steps[currentStepIndex].title }}</h2>
 
   <form [formGroup]="wizardForm" (ngSubmit)="onSubmit()">
-    <div>TODO: render fields here</div>
+    <div *ngFor="let question of steps[currentStepIndex]?.questions" class="field">
+      <label>{{ question.label }}</label>
+      <ng-container [ngSwitch]="question.type">
+        <input *ngSwitchCase="'input'" type="text" [formControlName]="question.key">
+        <input *ngSwitchCase="'numeric'" type="number" [formControlName]="question.key">
+      </ng-container>
+    </div>
 
     <div class="navigation">
-      @if (currentStepIndex > 0) {<button type="button" (click)="prevStep()">Previous</button>}
-      @if (currentStepIndex < steps.length - 1 ) { <button type="button" (click)="nextStep()">Next</button> }
-        @if (currentStepIndex === steps.length - 1) { <button type="submit">Submit</button> }
+      <button *ngIf="currentStepIndex > 0" type="button" (click)="prevStep()">Previous</button>
+      <button *ngIf="currentStepIndex < steps.length - 1" type="button" (click)="nextStep()">Next</button>
+      <button *ngIf="currentStepIndex === steps.length - 1" type="submit">Submit</button>
     </div>
+
     <div class="progress">
       Step {{ currentStepIndex + 1 }}/{{ steps.length }}
     </div>
   </form>
 </div>
-}
