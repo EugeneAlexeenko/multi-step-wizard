@@ -1,9 +1,28 @@
-<p>wizard component</p>
+<h1>Multi Step Wizard Example:</h1>
 
 @if (error) {
-<div class="error"> {{error}} </div>
+<div class="error">{{error}}</div>
 }
 
 @if (steps && steps.length > 0) {
-<pre>{{steps | json}}</pre>
+<div class="wizard">
+  <h2>{{ steps[currentStepIndex].title }}</h2>
+
+  <div>TODO: render fields here</div>
+
+  <div class="navigation">
+    @if (currentStepIndex > 0) {
+    <button type="button" (click)="prevStep()">Previous</button>
+    }
+    @if (currentStepIndex < steps.length - 1 ) { <button type="button" (click)="nextStep()">Next</button>
+      }
+      @if (currentStepIndex === steps.length - 1) {
+      <button type="submit">Submit</button>
+      }
+  </div>
+
+  <div class="progress">
+    Step {{ currentStepIndex + 1 }}/{{ steps.length }}
+  </div>
+</div>
 }

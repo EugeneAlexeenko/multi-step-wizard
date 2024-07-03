@@ -1,3 +1,7 @@
 .error {
   color: red;
 }
+
+.wizard {
+  outline: 1px solid #ccc;
+}

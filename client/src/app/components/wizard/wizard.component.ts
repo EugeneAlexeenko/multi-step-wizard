@@ -16,6 +16,8 @@ export class WizardComponent implements OnInit {
   steps: WizardStep[] = [];
   error: string | null = null;
 
+  currentStepIndex = 0;
+
   constructor(private wizardService: WizardService) { }
 
   ngOnInit(): void {
@@ -31,5 +33,16 @@ export class WizardComponent implements OnInit {
       });
   }
 
+  prevStep() {
+    if (this.currentStepIndex > 0) {
+      this.currentStepIndex--;
+    }
+  }
+
+  nextStep() {
+    if (this.currentStepIndex < this.steps.length - 1) {
+      this.currentStepIndex++;
+    }
+  }
 }
 
