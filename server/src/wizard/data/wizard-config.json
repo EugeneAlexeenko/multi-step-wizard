@@ -1,0 +1,97 @@
+[
+  {
+    "step": 1,
+    "title": "Personal Information",
+    "questions": [
+      {
+        "type": "input",
+        "label": "Full Name",
+        "key": "fullName",
+        "validators": ["required"]
+      },
+      {
+        "type": "numeric",
+        "label": "Age",
+        "key": "age",
+        "validators": ["required", "min:0"]
+      }
+    ]
+  },
+  {
+    "step": 2,
+    "title": "Health History",
+    "questions": [
+      {
+        "type": "single-choice",
+        "label": "Do you have any allergies?",
+        "key": "allergies",
+        "options": ["Yes", "No"],
+        "validators": ["required"]
+      },
+      {
+        "type": "multi-choice",
+        "label": "Select past illnesses",
+        "key": "pastIllnesses",
+        "options": ["Diabetes", "Hypertension", "Asthma"],
+        "validators": ["required"]
+      }
+    ]
+  },
+  {
+    "step": 3,
+    "title": "Current Medications",
+    "questions": [
+      {
+        "type": "input",
+        "label": "List any current medications",
+        "key": "currentMedications",
+        "validators": ["required"]
+      },
+      {
+        "type": "single-choice",
+        "label": "Are you taking any supplements?",
+        "key": "supplements",
+        "options": ["Yes", "No"],
+        "validators": ["required"]
+      }
+    ]
+  },
+  {
+    "step": 4,
+    "title": "Lifestyle and Habits",
+    "questions": [
+      {
+        "type": "multi-choice",
+        "label": "How often do you exercise?",
+        "key": "exerciseFrequency",
+        "options": ["Daily", "Weekly", "Rarely", "Never"],
+        "validators": ["required"]
+      },
+      {
+        "type": "single-choice",
+        "label": "Do you smoke?",
+        "key": "smoke",
+        "options": ["Yes", "No"],
+        "validators": ["required"]
+      }
+    ]
+  },
+  {
+    "step": 5,
+    "title": "Emergency Contact",
+    "questions": [
+      {
+        "type": "input",
+        "label": "Emergency Contact Name",
+        "key": "emergencyContactName",
+        "validators": ["required"]
+      },
+      {
+        "type": "numeric",
+        "label": "Emergency Contact Phone Number",
+        "key": "emergencyContactPhone",
+        "validators": ["required", "minLength:10", "maxLength:15"]
+      }
+    ]
+  }
+]
