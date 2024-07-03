@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { WizardService } from '../../services/wizard.service';
@@ -41,9 +41,21 @@ export class WizardComponent implements OnInit {
   buildForm() {
     this.steps.forEach(step => {
       step.questions.forEach(question => {
-        this.wizardForm.addControl(question.key, this.formBuilder.control(''));
+        if (question.type === 'multi-choice') {
+          const formArray = this.formBuilder.array(
+            question.options!.map(() => this.formBuilder.control(false)));
+
+          this.wizardForm.addControl(question.key, formArray);
+        } else {
+          this.wizardForm.addControl(question.key, this.formBuilder.control(''));
+        }
       });
     });
+  }
+
+  onCheckboxChange(event: any, controlName: string, index: number): void {
+    const formArray: FormArray = this.wizardForm.get(controlName) as FormArray;
+    formArray.at(index).setValue(event.target.checked);
   }
 
   prevStep() {

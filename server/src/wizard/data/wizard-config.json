@@ -61,7 +61,7 @@
     "title": "Lifestyle and Habits",
     "questions": [
       {
-        "type": "multi-choice",
+        "type": "single-choice",
         "label": "How often do you exercise?",
         "key": "exerciseFrequency",
         "options": ["Daily", "Weekly", "Rarely", "Never"],

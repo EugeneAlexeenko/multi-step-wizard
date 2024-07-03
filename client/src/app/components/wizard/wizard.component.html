@@ -2,35 +2,50 @@
 
 <div *ngIf="error" class="error">{{error}}</div>
 
-<div *ngIf="steps.length > 0" class="wizard">
-  <h2>{{ steps[currentStepIndex].title }}</h2>
+<div class="container">
+  <div *ngIf="steps.length > 0" class="wizard">
+    <h2>{{ steps[currentStepIndex].title }}</h2>
 
-  <form [formGroup]="wizardForm" (ngSubmit)="onSubmit()">
-    <div *ngFor="let question of steps[currentStepIndex]?.questions" class="field">
-      <label>{{ question.label }}</label>
-      <ng-container [ngSwitch]="question.type">
+    <form [formGroup]="wizardForm" (ngSubmit)="onSubmit()">
+      <div *ngFor="let question of steps[currentStepIndex]?.questions" class="field">
+        <label>{{ question.label }}</label>
+        <ng-container [ngSwitch]="question.type">
 
-        <input *ngSwitchCase="'input'" type="text" [formControlName]="question.key">
+          <input *ngSwitchCase="'input'" type="text" [formControlName]="question.key">
 
-        <input *ngSwitchCase="'numeric'" type="number" [formControlName]="question.key">
+          <input *ngSwitchCase="'numeric'" type="number" [formControlName]="question.key">
 
-        <div *ngSwitchCase="'single-choice'">
-          <label *ngFor="let option of question.options">
-            <input type="radio" [value]="option" [formControlName]="question.key">{{ option }}
-          </label>
-        </div>
+          <div *ngSwitchCase="'single-choice'">
+            <label *ngFor="let option of question.options">
+              <input type="radio" [value]="option" [formControlName]="question.key">{{ option }}
+            </label>
+          </div>
 
-      </ng-container>
-    </div>
+          <div *ngSwitchCase="'multi-choice'">
+            <div *ngFor="let option of question.options; let i=index" [formArrayName]="question.key">
+              <label>
+                <input type="checkbox" [formControlName]="i" (change)="onCheckboxChange($event, question.key, i)" />
+                {{ option }}
+              </label>
+            </div>
+          </div>
 
-    <div class="navigation">
-      <button *ngIf="currentStepIndex > 0" type="button" (click)="prevStep()">Previous</button>
-      <button *ngIf="currentStepIndex < steps.length - 1" type="button" (click)="nextStep()">Next</button>
-      <button *ngIf="currentStepIndex === steps.length - 1" type="submit">Submit</button>
-    </div>
+        </ng-container>
+      </div>
 
-    <div class="progress">
-      Step {{ currentStepIndex + 1 }}/{{ steps.length }}
-    </div>
-  </form>
+      <div class="navigation">
+        <button *ngIf="currentStepIndex > 0" type="button" (click)="prevStep()">Previous</button>
+        <button *ngIf="currentStepIndex < steps.length - 1" type="button" (click)="nextStep()">Next</button>
+        <button *ngIf="currentStepIndex === steps.length - 1" type="submit">Submit</button>
+      </div>
+
+      <div class="progress">
+        Step {{ currentStepIndex + 1 }}/{{ steps.length }}
+      </div>
+    </form>
+  </div>
+  <div class="preview">
+    <h2>Form state preview</h2>
+    <pre>{{ wizardForm.value | json }}</pre>
+  </div>
 </div>

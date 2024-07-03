@@ -2,8 +2,22 @@
   color: red;
 }
 
-.wizard {
+.container {
   padding: 5px 10px;
+  display: flex;
+}
+
+.wizard {
+  width: 40%;
+  padding: 5px 10px;
+  background-color: #f9f9f9;
+  flex-grow: 1;
+}
+
+.preview {
+  color: #fff;
+  padding: 5px 10px;
+  background-color: #4d5e6d;
 }
 
 .field {
