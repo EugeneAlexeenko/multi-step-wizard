@@ -71,7 +71,22 @@ export class WizardComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.wizardForm.value);
+    // TODO: validate form
+    const formValues = this.wizardForm.value;
+    const output = { ...formValues };
+
+    // Convert FormArray values to arrays of selected options
+    this.steps.forEach(step => {
+      step.questions.forEach(question => {
+        if (question.type === 'multi-choice') {
+          const selectedOptions = question.options!.filter((option, index) => formValues[question.key][index]);
+          output[question.key] = selectedOptions;
+        }
+      });
+    });
+
+    console.log(output);
+    // TODO: send output to server, display the result
   }
 }
 
